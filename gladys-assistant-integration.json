@@ -1,0 +1,1609 @@
+{
+  "manifest_version": 1,
+  "type": "device",
+  "name": "Atmo France",
+  "description": {
+    "en": "French air quality index (ATMO) per commune: forecast, pollution episodes and pollen.",
+    "fr": "Indice de qualité de l’air ATMO par commune : prévision, épisodes de pollution, pollens.",
+    "de": "Französischer Luftqualitätsindex ATMO je Gemeinde: Prognose, Smog-Episoden, Pollen.",
+    "es": "Índice francés de calidad del aire ATMO por municipio: previsión, episodios, polen."
+  },
+  "version": "0.1.0",
+  "docker_image": "ghcr.io/william-de71/gladys-atmo-france:0.1.0",
+  "gladys_version": ">=5.2.0",
+  "categories": ["environment"],
+  "cover_image": "https://raw.githubusercontent.com/William-De71/gladys-atmo-france/main/cover.jpg",
+  "transports": ["cloud"],
+  "location": true,
+  "config_schema": [
+    {
+      "key": "intro",
+      "type": "section",
+      "label": {
+        "en": "Atmo Data account",
+        "fr": "Compte Atmo Data",
+        "de": "Atmo-Data-Konto",
+        "es": "Cuenta de Atmo Data"
+      },
+      "description": {
+        "en": "The data come from Atmo Data, the open data service of the Fédération Atmo France and of the regional air quality agencies (AASQA): the ATMO index of each commune today and tomorrow, the pollution episodes of the department and the pollen allergy risk. The account is free but must be requested: fill in the form, wait for the validation e-mail of Atmo France (a few days), then create your password. The data are updated once a day, early in the afternoon; the integration reads them twice a day, about ten requests a day.",
+        "fr": "Les données viennent d’Atmo Data, le service de données ouvertes de la Fédération Atmo France et des associations régionales de surveillance de la qualité de l’air (AASQA) : l’indice ATMO de chaque commune aujourd’hui et demain, les épisodes de pollution du département et le risque d’allergie aux pollens. Le compte est gratuit mais doit être demandé : remplissez le formulaire, attendez l’e-mail de validation d’Atmo France (quelques jours), puis créez votre mot de passe. Les données sont mises à jour une fois par jour, en début d’après-midi ; l’intégration les lit deux fois par jour, une dizaine de requêtes par jour.",
+        "de": "Die Daten stammen von Atmo Data, dem Open-Data-Dienst der Fédération Atmo France und der regionalen Luftgüte-Verbände (AASQA): der ATMO-Index jeder Gemeinde für heute und morgen, die Schadstoffepisoden des Departements und das Pollenallergierisiko. Das Konto ist kostenlos, muss aber beantragt werden: Füllen Sie das Formular aus, warten Sie auf die Bestätigungs-E-Mail von Atmo France (einige Tage) und legen Sie dann Ihr Passwort fest. Die Daten werden einmal am Tag am frühen Nachmittag aktualisiert; die Integration liest sie zweimal täglich, etwa zehn Anfragen pro Tag.",
+        "es": "Los datos proceden de Atmo Data, el servicio de datos abiertos de la Fédération Atmo France y de las asociaciones regionales de vigilancia de la calidad del aire (AASQA): el índice ATMO de cada municipio hoy y mañana, los episodios de contaminación del departamento y el riesgo de alergia al polen. La cuenta es gratuita pero hay que solicitarla: rellene el formulario, espere el correo de validación de Atmo France (unos días) y cree su contraseña. Los datos se actualizan una vez al día, a primera hora de la tarde; la integración los lee dos veces al día, una decena de peticiones diarias."
+      },
+      "links": [
+        {
+          "url": "https://admindata.atmo-france.org/inscription-api",
+          "label": {
+            "en": "Request a free account",
+            "fr": "Demander un compte gratuit",
+            "de": "Kostenloses Konto beantragen",
+            "es": "Solicitar una cuenta gratuita"
+          }
+        },
+        {
+          "url": "https://www.atmo-france.org/article/lindice-atmo",
+          "label": {
+            "en": "About the ATMO index",
+            "fr": "À propos de l’indice ATMO",
+            "de": "Über den ATMO-Index",
+            "es": "Sobre el índice ATMO"
+          }
+        }
+      ]
+    },
+    {
+      "key": "username",
+      "type": "string",
+      "required": true,
+      "label": {
+        "en": "User name",
+        "fr": "Identifiant",
+        "de": "Benutzername",
+        "es": "Usuario"
+      },
+      "description": {
+        "en": "The user name of your Atmo Data account.",
+        "fr": "L’identifiant de votre compte Atmo Data.",
+        "de": "Der Benutzername Ihres Atmo-Data-Kontos.",
+        "es": "El usuario de su cuenta de Atmo Data."
+      }
+    },
+    {
+      "key": "password",
+      "type": "secret",
+      "required": true,
+      "label": {
+        "en": "Password",
+        "fr": "Mot de passe",
+        "de": "Passwort",
+        "es": "Contraseña"
+      }
+    },
+    {
+      "key": "places",
+      "type": "section",
+      "label": {
+        "en": "Communes",
+        "fr": "Communes",
+        "de": "Gemeinden",
+        "es": "Municipios"
+      },
+      "description": {
+        "en": "Choose a house of Gladys: its location gives the commune (Settings > Houses). Or type the commune: “Mâcon”, “71000”, “Saint-Denis 93200” or its INSEE code. Each commune becomes a device in the Discover tab. Up to three places.",
+        "fr": "Choisissez une maison de Gladys : sa position donne la commune (Paramètres > Maisons). Ou saisissez la commune : « Mâcon », « 71000 », « Saint-Denis 93200 » ou son code INSEE. Chaque commune devient un appareil dans l’onglet Découverte. Jusqu’à trois lieux.",
+        "de": "Wählen Sie ein Haus von Gladys: Sein Standort ergibt die Gemeinde (Einstellungen > Häuser). Oder geben Sie die Gemeinde ein: „Mâcon“, „71000“, „Saint-Denis 93200“ oder ihren INSEE-Code. Jede Gemeinde wird zu einem Gerät im Tab Entdecken. Bis zu drei Orte.",
+        "es": "Elija una casa de Gladys: su ubicación da el municipio (Ajustes > Casas). O escriba el municipio: «Mâcon», «71000», «Saint-Denis 93200» o su código INSEE. Cada municipio se convierte en un dispositivo en la pestaña Descubrir. Hasta tres lugares."
+      }
+    },
+    {
+      "key": "house_1",
+      "type": "select",
+      "source": "houses",
+      "label": {
+        "en": "House",
+        "fr": "Maison",
+        "de": "Haus",
+        "es": "Casa"
+      },
+      "description": {
+        "en": "Its location in Gladys gives the commune.",
+        "fr": "Sa position dans Gladys donne la commune.",
+        "de": "Ihr Standort in Gladys ergibt die Gemeinde.",
+        "es": "Su ubicación en Gladys da el municipio."
+      }
+    },
+    {
+      "key": "commune_1",
+      "type": "string",
+      "label": {
+        "en": "Or a commune",
+        "fr": "Ou une commune",
+        "de": "Oder eine Gemeinde",
+        "es": "O un municipio"
+      },
+      "description": {
+        "en": "Name, postal code, “name postal code” or INSEE code. Wins over the house.",
+        "fr": "Nom, code postal, « nom code postal » ou code INSEE. Prioritaire sur la maison.",
+        "de": "Name, Postleitzahl, „Name Postleitzahl“ oder INSEE-Code. Hat Vorrang vor dem Haus.",
+        "es": "Nombre, código postal, «nombre código postal» o código INSEE. Prevalece sobre la casa."
+      },
+      "placeholder": {
+        "en": "Mâcon 71000",
+        "fr": "Mâcon 71000",
+        "de": "Mâcon 71000",
+        "es": "Mâcon 71000"
+      },
+      "required": false
+    },
+    {
+      "key": "place_2_section",
+      "type": "section",
+      "label": {
+        "en": "Place 2",
+        "fr": "Lieu 2",
+        "de": "Ort 2",
+        "es": "Lugar 2"
+      },
+      "description": {
+        "en": "Another commune to follow (a second home, the workplace, the school). Optional.",
+        "fr": "Une autre commune à suivre (résidence secondaire, travail, école). Facultatif.",
+        "de": "Eine weitere Gemeinde (Zweitwohnsitz, Arbeitsplatz, Schule). Optional.",
+        "es": "Otro municipio que seguir (segunda residencia, trabajo, colegio). Opcional."
+      }
+    },
+    {
+      "key": "house_2",
+      "type": "select",
+      "source": "houses",
+      "label": {
+        "en": "House",
+        "fr": "Maison",
+        "de": "Haus",
+        "es": "Casa"
+      },
+      "description": {
+        "en": "Its location in Gladys gives the commune.",
+        "fr": "Sa position dans Gladys donne la commune.",
+        "de": "Ihr Standort in Gladys ergibt die Gemeinde.",
+        "es": "Su ubicación en Gladys da el municipio."
+      }
+    },
+    {
+      "key": "commune_2",
+      "type": "string",
+      "label": {
+        "en": "Or a commune",
+        "fr": "Ou une commune",
+        "de": "Oder eine Gemeinde",
+        "es": "O un municipio"
+      },
+      "description": {
+        "en": "Name, postal code, “name postal code” or INSEE code. Wins over the house.",
+        "fr": "Nom, code postal, « nom code postal » ou code INSEE. Prioritaire sur la maison.",
+        "de": "Name, Postleitzahl, „Name Postleitzahl“ oder INSEE-Code. Hat Vorrang vor dem Haus.",
+        "es": "Nombre, código postal, «nombre código postal» o código INSEE. Prevalece sobre la casa."
+      },
+      "placeholder": {
+        "en": "Mâcon 71000",
+        "fr": "Mâcon 71000",
+        "de": "Mâcon 71000",
+        "es": "Mâcon 71000"
+      },
+      "required": false
+    },
+    {
+      "key": "place_3_section",
+      "type": "section",
+      "label": {
+        "en": "Place 3",
+        "fr": "Lieu 3",
+        "de": "Ort 3",
+        "es": "Lugar 3"
+      },
+      "description": {
+        "en": "Another commune to follow (a second home, the workplace, the school). Optional.",
+        "fr": "Une autre commune à suivre (résidence secondaire, travail, école). Facultatif.",
+        "de": "Eine weitere Gemeinde (Zweitwohnsitz, Arbeitsplatz, Schule). Optional.",
+        "es": "Otro municipio que seguir (segunda residencia, trabajo, colegio). Opcional."
+      }
+    },
+    {
+      "key": "house_3",
+      "type": "select",
+      "source": "houses",
+      "label": {
+        "en": "House",
+        "fr": "Maison",
+        "de": "Haus",
+        "es": "Casa"
+      },
+      "description": {
+        "en": "Its location in Gladys gives the commune.",
+        "fr": "Sa position dans Gladys donne la commune.",
+        "de": "Ihr Standort in Gladys ergibt die Gemeinde.",
+        "es": "Su ubicación en Gladys da el municipio."
+      }
+    },
+    {
+      "key": "commune_3",
+      "type": "string",
+      "label": {
+        "en": "Or a commune",
+        "fr": "Ou une commune",
+        "de": "Oder eine Gemeinde",
+        "es": "O un municipio"
+      },
+      "description": {
+        "en": "Name, postal code, “name postal code” or INSEE code. Wins over the house.",
+        "fr": "Nom, code postal, « nom code postal » ou code INSEE. Prioritaire sur la maison.",
+        "de": "Name, Postleitzahl, „Name Postleitzahl“ oder INSEE-Code. Hat Vorrang vor dem Haus.",
+        "es": "Nombre, código postal, «nombre código postal» o código INSEE. Prevalece sobre la casa."
+      },
+      "placeholder": {
+        "en": "Mâcon 71000",
+        "fr": "Mâcon 71000",
+        "de": "Mâcon 71000",
+        "es": "Mâcon 71000"
+      },
+      "required": false
+    },
+    {
+      "key": "options",
+      "type": "section",
+      "label": {
+        "en": "Options",
+        "fr": "Options",
+        "de": "Optionen",
+        "es": "Opciones"
+      }
+    },
+    {
+      "key": "pollen",
+      "type": "boolean",
+      "default": true,
+      "label": {
+        "en": "Pollen",
+        "fr": "Pollens",
+        "de": "Pollen",
+        "es": "Polen"
+      },
+      "description": {
+        "en": "Also read the pollen allergy risk (index and six main taxa). Changing it adds or removes features: update the devices in the Discover tab.",
+        "fr": "Lire aussi le risque d’allergie aux pollens (indice et six principaux taxons). Le changer ajoute ou retire des fonctionnalités : mettez à jour les appareils dans l’onglet Découverte.",
+        "de": "Auch das Pollenallergierisiko lesen (Index und sechs Hauptarten). Eine Änderung fügt Funktionen hinzu oder entfernt sie: Aktualisieren Sie die Geräte im Tab Entdecken.",
+        "es": "Leer también el riesgo de alergia al polen (índice y seis taxones principales). Cambiarlo añade o quita funciones: actualice los dispositivos en la pestaña Descubrir."
+      }
+    },
+    {
+      "key": "language",
+      "type": "select",
+      "default": "auto",
+      "required": false,
+      "label": {
+        "en": "Language of the texts",
+        "fr": "Langue des textes",
+        "de": "Sprache der Texte",
+        "es": "Idioma de los textos"
+      },
+      "description": {
+        "en": "Names of the devices, air quality as text, scene summaries. Automatic: the language of your dashboard, once an Atmo France widget has been displayed (French before).",
+        "fr": "Noms des appareils, qualité de l’air en texte, résumés des scènes. Automatique : la langue de votre tableau de bord, dès qu’un widget Atmo France a été affiché (français avant).",
+        "de": "Gerätenamen, Luftqualität als Text, Szenen-Zusammenfassungen. Automatisch: die Sprache Ihres Dashboards, sobald ein Atmo-France-Widget angezeigt wurde (vorher Französisch).",
+        "es": "Nombres de los dispositivos, calidad del aire en texto, resúmenes de escenas. Automático: el idioma de su panel, en cuanto se haya mostrado un widget de Atmo France (antes, francés)."
+      },
+      "options": [
+        {
+          "value": "auto",
+          "label": {
+            "en": "Automatic",
+            "fr": "Automatique",
+            "de": "Automatisch",
+            "es": "Automático"
+          }
+        },
+        {
+          "value": "en",
+          "label": {
+            "en": "English",
+            "fr": "English",
+            "de": "English",
+            "es": "English"
+          }
+        },
+        {
+          "value": "fr",
+          "label": {
+            "en": "Français",
+            "fr": "Français",
+            "de": "Français",
+            "es": "Français"
+          }
+        },
+        {
+          "value": "de",
+          "label": {
+            "en": "Deutsch",
+            "fr": "Deutsch",
+            "de": "Deutsch",
+            "es": "Deutsch"
+          }
+        },
+        {
+          "value": "es",
+          "label": {
+            "en": "Español",
+            "fr": "Español",
+            "de": "Español",
+            "es": "Español"
+          }
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "key": "refresh",
+      "timeout_seconds": 90,
+      "label": {
+        "en": "Read now",
+        "fr": "Lire maintenant",
+        "de": "Jetzt lesen",
+        "es": "Leer ahora"
+      },
+      "description": {
+        "en": "Checks the account and reads the data now, instead of waiting for the next reading (at most every 10 minutes).",
+        "fr": "Vérifie le compte et lit les données tout de suite, sans attendre la prochaine lecture (au plus toutes les 10 minutes).",
+        "de": "Prüft das Konto und liest die Daten sofort, ohne auf die nächste Abfrage zu warten (höchstens alle 10 Minuten).",
+        "es": "Comprueba la cuenta y lee los datos ahora, sin esperar a la próxima lectura (como mucho cada 10 minutos)."
+      }
+    },
+    {
+      "key": "diagnostic",
+      "timeout_seconds": 10,
+      "label": {
+        "en": "Diagnostic",
+        "fr": "Diagnostic",
+        "de": "Diagnose",
+        "es": "Diagnóstico"
+      },
+      "description": {
+        "en": "Writes to the Logs tab the communes found, the schedule, the last error and the data read, for a report on GitHub or the forum. The user name and the password are left out.",
+        "fr": "Écrit dans l’onglet Journaux les communes trouvées, le planning, la dernière erreur et les données lues, pour un retour sur GitHub ou le forum. L’identifiant et le mot de passe en sont retirés.",
+        "de": "Schreibt in den Tab Protokolle die gefundenen Gemeinden, den Zeitplan, den letzten Fehler und die gelesenen Daten, für eine Meldung auf GitHub oder im Forum. Benutzername und Passwort sind entfernt.",
+        "es": "Escribe en la pestaña Registros los municipios encontrados, la planificación, el último error y los datos leídos, para un informe en GitHub o el foro. El usuario y la contraseña se omiten."
+      }
+    }
+  ],
+  "widgets": [
+    {
+      "key": "forecast",
+      "icon": "wind",
+      "label": {
+        "en": "Air quality",
+        "fr": "Qualité de l’air",
+        "de": "Luftqualität",
+        "es": "Calidad del aire"
+      },
+      "description": {
+        "en": "ATMO index today and tomorrow, sub-indices, pollution episodes, pollen.",
+        "fr": "Indice ATMO aujourd’hui et demain, sous-indices, épisodes de pollution, pollens.",
+        "de": "ATMO-Index heute und morgen, Teilindizes, Schadstoffepisoden, Pollen.",
+        "es": "Índice ATMO hoy y mañana, subíndices, episodios de contaminación, polen."
+      },
+      "settings": [
+        {
+          "key": "place",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Commune",
+            "fr": "Commune",
+            "de": "Gemeinde",
+            "es": "Municipio"
+          },
+          "description": {
+            "en": "Empty: the first commune.",
+            "fr": "Vide : la première commune.",
+            "de": "Leer: die erste Gemeinde.",
+            "es": "Vacío: el primer municipio."
+          },
+          "required": false
+        }
+      ]
+    },
+    {
+      "key": "pollen",
+      "icon": "feather",
+      "label": {
+        "en": "Pollen",
+        "fr": "Pollens",
+        "de": "Pollen",
+        "es": "Polen"
+      },
+      "description": {
+        "en": "Pollen allergy risk today and tomorrow, level of the main taxa.",
+        "fr": "Risque d’allergie aux pollens aujourd’hui et demain, niveau des principaux taxons.",
+        "de": "Pollenallergierisiko heute und morgen, Stufe der Hauptarten.",
+        "es": "Riesgo de alergia al polen hoy y mañana, nivel de los principales taxones."
+      },
+      "settings": [
+        {
+          "key": "place",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Commune",
+            "fr": "Commune",
+            "de": "Gemeinde",
+            "es": "Municipio"
+          },
+          "description": {
+            "en": "Empty: the first commune.",
+            "fr": "Vide : la première commune.",
+            "de": "Leer: die erste Gemeinde.",
+            "es": "Vacío: el primer municipio."
+          },
+          "required": false
+        }
+      ]
+    }
+  ],
+  "scene_triggers": [
+    {
+      "key": "air_quality_degraded",
+      "label": {
+        "en": "Atmo: air quality degraded",
+        "fr": "Atmo : qualité de l’air dégradée",
+        "de": "Atmo: Luftqualität verschlechtert",
+        "es": "Atmo: calidad del aire degradada"
+      },
+      "description": {
+        "en": "The ATMO index of today or tomorrow reaches “Moderate” or worse, or worsens again.",
+        "fr": "L’indice ATMO d’aujourd’hui ou de demain passe à « Dégradé » ou pire, ou s’aggrave encore.",
+        "de": "Der ATMO-Index von heute oder morgen erreicht „Mäßig“ oder schlechter oder verschlechtert sich weiter.",
+        "es": "El índice ATMO de hoy o mañana llega a «Moderada» o peor, o empeora de nuevo."
+      },
+      "fields": [
+        {
+          "key": "place",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Commune",
+            "fr": "Commune",
+            "de": "Gemeinde",
+            "es": "Municipio"
+          },
+          "description": {
+            "en": "Leave empty for any.",
+            "fr": "Laissez vide pour tous.",
+            "de": "Leer lassen für alle.",
+            "es": "Déjelo vacío para todos."
+          },
+          "required": false
+        },
+        {
+          "key": "day",
+          "type": "select",
+          "label": {
+            "en": "Day",
+            "fr": "Jour",
+            "de": "Tag",
+            "es": "Día"
+          },
+          "description": {
+            "en": "Leave empty for any.",
+            "fr": "Laissez vide pour tous.",
+            "de": "Leer lassen für alle.",
+            "es": "Déjelo vacío para todos."
+          },
+          "options": [
+            {
+              "value": "today",
+              "label": {
+                "en": "Today",
+                "fr": "Aujourd’hui",
+                "de": "Heute",
+                "es": "Hoy"
+              }
+            },
+            {
+              "value": "tomorrow",
+              "label": {
+                "en": "Tomorrow",
+                "fr": "Demain",
+                "de": "Morgen",
+                "es": "Mañana"
+              }
+            }
+          ],
+          "required": false
+        },
+        {
+          "key": "level",
+          "type": "multi_select",
+          "label": {
+            "en": "Levels",
+            "fr": "Niveaux",
+            "de": "Stufen",
+            "es": "Niveles"
+          },
+          "description": {
+            "en": "Leave empty for any.",
+            "fr": "Laissez vide pour tous.",
+            "de": "Leer lassen für alle.",
+            "es": "Déjelo vacío para todos."
+          },
+          "options": [
+            {
+              "value": "3",
+              "label": {
+                "en": "Moderate",
+                "fr": "Dégradé",
+                "de": "Mäßig",
+                "es": "Moderada"
+              }
+            },
+            {
+              "value": "4",
+              "label": {
+                "en": "Poor",
+                "fr": "Mauvais",
+                "de": "Schlecht",
+                "es": "Mala"
+              }
+            },
+            {
+              "value": "5",
+              "label": {
+                "en": "Very poor",
+                "fr": "Très mauvais",
+                "de": "Sehr schlecht",
+                "es": "Muy mala"
+              }
+            },
+            {
+              "value": "6",
+              "label": {
+                "en": "Extremely poor",
+                "fr": "Extrêmement mauvais",
+                "de": "Extrem schlecht",
+                "es": "Extremadamente mala"
+              }
+            }
+          ],
+          "required": false
+        }
+      ],
+      "variables": [
+        {
+          "key": "place_name",
+          "type": "string",
+          "label": {
+            "en": "Commune",
+            "fr": "Commune",
+            "de": "Gemeinde",
+            "es": "Municipio"
+          }
+        },
+        {
+          "key": "day",
+          "type": "string",
+          "label": {
+            "en": "Day",
+            "fr": "Jour",
+            "de": "Tag",
+            "es": "Día"
+          },
+          "description": {
+            "en": "today or tomorrow.",
+            "fr": "today ou tomorrow.",
+            "de": "today oder tomorrow.",
+            "es": "today o tomorrow."
+          }
+        },
+        {
+          "key": "date",
+          "type": "string",
+          "label": {
+            "en": "Date",
+            "fr": "Date",
+            "de": "Datum",
+            "es": "Fecha"
+          },
+          "description": {
+            "en": "YYYY-MM-DD.",
+            "fr": "AAAA-MM-JJ.",
+            "de": "JJJJ-MM-TT.",
+            "es": "AAAA-MM-DD."
+          }
+        },
+        {
+          "key": "level",
+          "type": "number",
+          "label": {
+            "en": "ATMO index",
+            "fr": "Indice ATMO",
+            "de": "ATMO-Index",
+            "es": "Índice ATMO"
+          },
+          "description": {
+            "en": "1 (good) to 6 (extremely poor).",
+            "fr": "1 (bon) à 6 (extrêmement mauvais).",
+            "de": "1 (gut) bis 6 (extrem schlecht).",
+            "es": "1 (buena) a 6 (extremadamente mala)."
+          }
+        },
+        {
+          "key": "label",
+          "type": "string",
+          "label": {
+            "en": "Level",
+            "fr": "Niveau",
+            "de": "Stufe",
+            "es": "Nivel"
+          }
+        },
+        {
+          "key": "pollutants",
+          "type": "string",
+          "label": {
+            "en": "Pollutants",
+            "fr": "Polluants",
+            "de": "Schadstoffe",
+            "es": "Contaminantes"
+          },
+          "description": {
+            "en": "The pollutants at the level of the index.",
+            "fr": "Les polluants au niveau de l’indice.",
+            "de": "Die Schadstoffe auf der Stufe des Index.",
+            "es": "Los contaminantes al nivel del índice."
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein fertiger Satz für eine Nachricht.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        },
+        {
+          "key": "insee",
+          "type": "string",
+          "label": {
+            "en": "INSEE code",
+            "fr": "Code INSEE",
+            "de": "INSEE-Code",
+            "es": "Código INSEE"
+          }
+        },
+        {
+          "key": "place",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          },
+          "description": {
+            "en": "External id of the commune device.",
+            "fr": "Identifiant externe de l’appareil de la commune.",
+            "de": "Externe ID des Gemeinde-Geräts.",
+            "es": "Identificador externo del dispositivo del municipio."
+          }
+        }
+      ]
+    },
+    {
+      "key": "pollution_episode",
+      "label": {
+        "en": "Atmo: pollution episode",
+        "fr": "Atmo : épisode de pollution",
+        "de": "Atmo: Schadstoffepisode",
+        "es": "Atmo: episodio de contaminación"
+      },
+      "description": {
+        "en": "An information or alert procedure is announced for the department, today or tomorrow, or rises to a higher level.",
+        "fr": "Une procédure d’information ou d’alerte est annoncée pour le département, aujourd’hui ou demain, ou passe à un niveau supérieur.",
+        "de": "Ein Informations- oder Alarmverfahren wird für das Departement angekündigt, heute oder morgen, oder steigt auf eine höhere Stufe.",
+        "es": "Se anuncia un procedimiento de información o alerta para el departamento, hoy o mañana, o sube de nivel."
+      },
+      "fields": [
+        {
+          "key": "place",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Commune",
+            "fr": "Commune",
+            "de": "Gemeinde",
+            "es": "Municipio"
+          },
+          "description": {
+            "en": "Leave empty for any.",
+            "fr": "Laissez vide pour tous.",
+            "de": "Leer lassen für alle.",
+            "es": "Déjelo vacío para todos."
+          },
+          "required": false
+        },
+        {
+          "key": "day",
+          "type": "select",
+          "label": {
+            "en": "Day",
+            "fr": "Jour",
+            "de": "Tag",
+            "es": "Día"
+          },
+          "description": {
+            "en": "Leave empty for any.",
+            "fr": "Laissez vide pour tous.",
+            "de": "Leer lassen für alle.",
+            "es": "Déjelo vacío para todos."
+          },
+          "options": [
+            {
+              "value": "today",
+              "label": {
+                "en": "Today",
+                "fr": "Aujourd’hui",
+                "de": "Heute",
+                "es": "Hoy"
+              }
+            },
+            {
+              "value": "tomorrow",
+              "label": {
+                "en": "Tomorrow",
+                "fr": "Demain",
+                "de": "Morgen",
+                "es": "Mañana"
+              }
+            }
+          ],
+          "required": false
+        },
+        {
+          "key": "level",
+          "type": "multi_select",
+          "label": {
+            "en": "Levels",
+            "fr": "Niveaux",
+            "de": "Stufen",
+            "es": "Niveles"
+          },
+          "description": {
+            "en": "Leave empty for any.",
+            "fr": "Laissez vide pour tous.",
+            "de": "Leer lassen für alle.",
+            "es": "Déjelo vacío para todos."
+          },
+          "required": false,
+          "options": [
+            {
+              "value": "information",
+              "label": {
+                "en": "Information and advice",
+                "fr": "Information et recommandation",
+                "de": "Information und Empfehlungen",
+                "es": "Información y recomendaciones"
+              }
+            },
+            {
+              "value": "persistence",
+              "label": {
+                "en": "Alert on persistence",
+                "fr": "Alerte sur persistance",
+                "de": "Alarm wegen Andauern",
+                "es": "Alerta por persistencia"
+              }
+            },
+            {
+              "value": "alert",
+              "label": {
+                "en": "Alert",
+                "fr": "Alerte",
+                "de": "Alarm",
+                "es": "Alerta"
+              }
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "place_name",
+          "type": "string",
+          "label": {
+            "en": "Commune",
+            "fr": "Commune",
+            "de": "Gemeinde",
+            "es": "Municipio"
+          }
+        },
+        {
+          "key": "department",
+          "type": "string",
+          "label": {
+            "en": "Department",
+            "fr": "Département",
+            "de": "Departement",
+            "es": "Departamento"
+          }
+        },
+        {
+          "key": "day",
+          "type": "string",
+          "label": {
+            "en": "Day",
+            "fr": "Jour",
+            "de": "Tag",
+            "es": "Día"
+          },
+          "description": {
+            "en": "today or tomorrow.",
+            "fr": "today ou tomorrow.",
+            "de": "today oder tomorrow.",
+            "es": "today o tomorrow."
+          }
+        },
+        {
+          "key": "date",
+          "type": "string",
+          "label": {
+            "en": "Date",
+            "fr": "Date",
+            "de": "Datum",
+            "es": "Fecha"
+          },
+          "description": {
+            "en": "YYYY-MM-DD.",
+            "fr": "AAAA-MM-JJ.",
+            "de": "JJJJ-MM-TT.",
+            "es": "AAAA-MM-DD."
+          }
+        },
+        {
+          "key": "level",
+          "type": "string",
+          "label": {
+            "en": "Level",
+            "fr": "Niveau",
+            "de": "Stufe",
+            "es": "Nivel"
+          },
+          "description": {
+            "en": "information, persistence or alert.",
+            "fr": "information, persistence ou alert.",
+            "de": "information, persistence oder alert.",
+            "es": "information, persistence o alert."
+          }
+        },
+        {
+          "key": "level_number",
+          "type": "number",
+          "label": {
+            "en": "Level number",
+            "fr": "Numéro du niveau",
+            "de": "Stufennummer",
+            "es": "Número de nivel"
+          },
+          "description": {
+            "en": "1 information, 2 alert on persistence, 3 alert.",
+            "fr": "1 information, 2 alerte sur persistance, 3 alerte.",
+            "de": "1 Information, 2 Alarm wegen Andauern, 3 Alarm.",
+            "es": "1 información, 2 alerta por persistencia, 3 alerta."
+          }
+        },
+        {
+          "key": "label",
+          "type": "string",
+          "label": {
+            "en": "Procedure",
+            "fr": "Procédure",
+            "de": "Verfahren",
+            "es": "Procedimiento"
+          }
+        },
+        {
+          "key": "pollutants",
+          "type": "string",
+          "label": {
+            "en": "Pollutants",
+            "fr": "Polluants",
+            "de": "Schadstoffe",
+            "es": "Contaminantes"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein fertiger Satz für eine Nachricht.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        },
+        {
+          "key": "insee",
+          "type": "string",
+          "label": {
+            "en": "INSEE code",
+            "fr": "Code INSEE",
+            "de": "INSEE-Code",
+            "es": "Código INSEE"
+          }
+        },
+        {
+          "key": "place",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          },
+          "description": {
+            "en": "External id of the commune device.",
+            "fr": "Identifiant externe de l’appareil de la commune.",
+            "de": "Externe ID des Gemeinde-Geräts.",
+            "es": "Identificador externo del dispositivo del municipio."
+          }
+        }
+      ]
+    },
+    {
+      "key": "pollen_alert",
+      "label": {
+        "en": "Atmo: pollen risk",
+        "fr": "Atmo : risque pollens",
+        "de": "Atmo: Pollenrisiko",
+        "es": "Atmo: riesgo de polen"
+      },
+      "description": {
+        "en": "The pollen allergy risk of today or tomorrow reaches “Moderate” or more, or rises again.",
+        "fr": "Le risque d’allergie aux pollens d’aujourd’hui ou de demain atteint « Modéré » ou plus, ou augmente encore.",
+        "de": "Das Pollenallergierisiko von heute oder morgen erreicht „Mäßig“ oder mehr oder steigt weiter.",
+        "es": "El riesgo de alergia al polen de hoy o mañana llega a «Moderado» o más, o vuelve a subir."
+      },
+      "fields": [
+        {
+          "key": "place",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Commune",
+            "fr": "Commune",
+            "de": "Gemeinde",
+            "es": "Municipio"
+          },
+          "description": {
+            "en": "Leave empty for any.",
+            "fr": "Laissez vide pour tous.",
+            "de": "Leer lassen für alle.",
+            "es": "Déjelo vacío para todos."
+          },
+          "required": false
+        },
+        {
+          "key": "day",
+          "type": "select",
+          "label": {
+            "en": "Day",
+            "fr": "Jour",
+            "de": "Tag",
+            "es": "Día"
+          },
+          "description": {
+            "en": "Leave empty for any.",
+            "fr": "Laissez vide pour tous.",
+            "de": "Leer lassen für alle.",
+            "es": "Déjelo vacío para todos."
+          },
+          "options": [
+            {
+              "value": "today",
+              "label": {
+                "en": "Today",
+                "fr": "Aujourd’hui",
+                "de": "Heute",
+                "es": "Hoy"
+              }
+            },
+            {
+              "value": "tomorrow",
+              "label": {
+                "en": "Tomorrow",
+                "fr": "Demain",
+                "de": "Morgen",
+                "es": "Mañana"
+              }
+            }
+          ],
+          "required": false
+        },
+        {
+          "key": "level",
+          "type": "multi_select",
+          "label": {
+            "en": "Levels",
+            "fr": "Niveaux",
+            "de": "Stufen",
+            "es": "Niveles"
+          },
+          "description": {
+            "en": "Leave empty for any.",
+            "fr": "Laissez vide pour tous.",
+            "de": "Leer lassen für alle.",
+            "es": "Déjelo vacío para todos."
+          },
+          "options": [
+            {
+              "value": "3",
+              "label": {
+                "en": "Moderate",
+                "fr": "Modéré",
+                "de": "Mäßig",
+                "es": "Moderado"
+              }
+            },
+            {
+              "value": "4",
+              "label": {
+                "en": "High",
+                "fr": "Élevé",
+                "de": "Hoch",
+                "es": "Alto"
+              }
+            },
+            {
+              "value": "5",
+              "label": {
+                "en": "Very high",
+                "fr": "Très élevé",
+                "de": "Sehr hoch",
+                "es": "Muy alto"
+              }
+            },
+            {
+              "value": "6",
+              "label": {
+                "en": "Extremely high",
+                "fr": "Extrêmement élevé",
+                "de": "Extrem hoch",
+                "es": "Extremadamente alto"
+              }
+            }
+          ],
+          "required": false
+        }
+      ],
+      "variables": [
+        {
+          "key": "place_name",
+          "type": "string",
+          "label": {
+            "en": "Commune",
+            "fr": "Commune",
+            "de": "Gemeinde",
+            "es": "Municipio"
+          }
+        },
+        {
+          "key": "day",
+          "type": "string",
+          "label": {
+            "en": "Day",
+            "fr": "Jour",
+            "de": "Tag",
+            "es": "Día"
+          },
+          "description": {
+            "en": "today or tomorrow.",
+            "fr": "today ou tomorrow.",
+            "de": "today oder tomorrow.",
+            "es": "today o tomorrow."
+          }
+        },
+        {
+          "key": "date",
+          "type": "string",
+          "label": {
+            "en": "Date",
+            "fr": "Date",
+            "de": "Datum",
+            "es": "Fecha"
+          },
+          "description": {
+            "en": "YYYY-MM-DD.",
+            "fr": "AAAA-MM-JJ.",
+            "de": "JJJJ-MM-TT.",
+            "es": "AAAA-MM-DD."
+          }
+        },
+        {
+          "key": "level",
+          "type": "number",
+          "label": {
+            "en": "Pollen index",
+            "fr": "Indice pollens",
+            "de": "Pollenindex",
+            "es": "Índice de polen"
+          },
+          "description": {
+            "en": "1 (very low) to 6 (extremely high).",
+            "fr": "1 (très faible) à 6 (extrêmement élevé).",
+            "de": "1 (sehr gering) bis 6 (extrem hoch).",
+            "es": "1 (muy bajo) a 6 (extremadamente alto)."
+          }
+        },
+        {
+          "key": "label",
+          "type": "string",
+          "label": {
+            "en": "Level",
+            "fr": "Niveau",
+            "de": "Stufe",
+            "es": "Nivel"
+          }
+        },
+        {
+          "key": "taxa",
+          "type": "string",
+          "label": {
+            "en": "Main pollen",
+            "fr": "Pollen responsable",
+            "de": "Hauptpollen",
+            "es": "Polen principal"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein fertiger Satz für eine Nachricht.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        },
+        {
+          "key": "insee",
+          "type": "string",
+          "label": {
+            "en": "INSEE code",
+            "fr": "Code INSEE",
+            "de": "INSEE-Code",
+            "es": "Código INSEE"
+          }
+        },
+        {
+          "key": "place",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          },
+          "description": {
+            "en": "External id of the commune device.",
+            "fr": "Identifiant externe de l’appareil de la commune.",
+            "de": "Externe ID des Gemeinde-Geräts.",
+            "es": "Identificador externo del dispositivo del municipio."
+          }
+        }
+      ]
+    },
+    {
+      "key": "forecast_published",
+      "label": {
+        "en": "Atmo: tomorrow’s forecast",
+        "fr": "Atmo : prévision de demain",
+        "de": "Atmo: Prognose für morgen",
+        "es": "Atmo: previsión de mañana"
+      },
+      "description": {
+        "en": "The forecast for tomorrow was published (once a day, in the afternoon): to send it in a message.",
+        "fr": "La prévision de demain a été publiée (une fois par jour, l’après-midi) : pour l’envoyer dans un message.",
+        "de": "Die Prognose für morgen wurde veröffentlicht (einmal täglich, nachmittags): um sie per Nachricht zu senden.",
+        "es": "Se publicó la previsión de mañana (una vez al día, por la tarde): para enviarla en un mensaje."
+      },
+      "fields": [
+        {
+          "key": "place",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Commune",
+            "fr": "Commune",
+            "de": "Gemeinde",
+            "es": "Municipio"
+          },
+          "description": {
+            "en": "Leave empty for any.",
+            "fr": "Laissez vide pour tous.",
+            "de": "Leer lassen für alle.",
+            "es": "Déjelo vacío para todos."
+          },
+          "required": false
+        }
+      ],
+      "variables": [
+        {
+          "key": "place_name",
+          "type": "string",
+          "label": {
+            "en": "Commune",
+            "fr": "Commune",
+            "de": "Gemeinde",
+            "es": "Municipio"
+          }
+        },
+        {
+          "key": "date",
+          "type": "string",
+          "label": {
+            "en": "Date",
+            "fr": "Date",
+            "de": "Datum",
+            "es": "Fecha"
+          },
+          "description": {
+            "en": "YYYY-MM-DD.",
+            "fr": "AAAA-MM-JJ.",
+            "de": "JJJJ-MM-TT.",
+            "es": "AAAA-MM-DD."
+          }
+        },
+        {
+          "key": "level",
+          "type": "number",
+          "label": {
+            "en": "ATMO index",
+            "fr": "Indice ATMO",
+            "de": "ATMO-Index",
+            "es": "Índice ATMO"
+          },
+          "description": {
+            "en": "1 (good) to 6 (extremely poor).",
+            "fr": "1 (bon) à 6 (extrêmement mauvais).",
+            "de": "1 (gut) bis 6 (extrem schlecht).",
+            "es": "1 (buena) a 6 (extremadamente mala)."
+          }
+        },
+        {
+          "key": "label",
+          "type": "string",
+          "label": {
+            "en": "Level",
+            "fr": "Niveau",
+            "de": "Stufe",
+            "es": "Nivel"
+          }
+        },
+        {
+          "key": "pollutants",
+          "type": "string",
+          "label": {
+            "en": "Pollutants",
+            "fr": "Polluants",
+            "de": "Schadstoffe",
+            "es": "Contaminantes"
+          }
+        },
+        {
+          "key": "episode_level",
+          "type": "number",
+          "label": {
+            "en": "Episode level",
+            "fr": "Niveau d’épisode",
+            "de": "Episodenstufe",
+            "es": "Nivel de episodio"
+          },
+          "description": {
+            "en": "0 none, 1 information, 2 alert on persistence, 3 alert.",
+            "fr": "0 aucun, 1 information, 2 alerte sur persistance, 3 alerte.",
+            "de": "0 keine, 1 Information, 2 Alarm wegen Andauern, 3 Alarm.",
+            "es": "0 ninguno, 1 información, 2 alerta por persistencia, 3 alerta."
+          }
+        },
+        {
+          "key": "episode_label",
+          "type": "string",
+          "label": {
+            "en": "Pollution episode",
+            "fr": "Épisode de pollution",
+            "de": "Schadstoffepisode",
+            "es": "Episodio de contaminación"
+          }
+        },
+        {
+          "key": "pollen_level",
+          "type": "number",
+          "label": {
+            "en": "Pollen index",
+            "fr": "Indice pollens",
+            "de": "Pollenindex",
+            "es": "Índice de polen"
+          }
+        },
+        {
+          "key": "pollen_label",
+          "type": "string",
+          "label": {
+            "en": "Pollen level",
+            "fr": "Niveau pollens",
+            "de": "Pollenstufe",
+            "es": "Nivel de polen"
+          }
+        },
+        {
+          "key": "pollen_taxa",
+          "type": "string",
+          "label": {
+            "en": "Main pollen",
+            "fr": "Pollen responsable",
+            "de": "Hauptpollen",
+            "es": "Polen principal"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein fertiger Satz für eine Nachricht.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        },
+        {
+          "key": "insee",
+          "type": "string",
+          "label": {
+            "en": "INSEE code",
+            "fr": "Code INSEE",
+            "de": "INSEE-Code",
+            "es": "Código INSEE"
+          }
+        },
+        {
+          "key": "place",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          },
+          "description": {
+            "en": "External id of the commune device.",
+            "fr": "Identifiant externe de l’appareil de la commune.",
+            "de": "Externe ID des Gemeinde-Geräts.",
+            "es": "Identificador externo del dispositivo del municipio."
+          }
+        }
+      ]
+    }
+  ],
+  "scene_actions": [
+    {
+      "key": "get_air_quality",
+      "timeout_seconds": 10,
+      "label": {
+        "en": "Atmo: read the air quality",
+        "fr": "Atmo : lire la qualité de l’air",
+        "de": "Atmo: Luftqualität lesen",
+        "es": "Atmo: leer la calidad del aire"
+      },
+      "description": {
+        "en": "The ATMO index, pollution episode and pollen of a commune, today or tomorrow, for the next actions (a message, a condition).",
+        "fr": "L’indice ATMO, l’épisode de pollution et les pollens d’une commune, aujourd’hui ou demain, pour les actions suivantes (un message, une condition).",
+        "de": "ATMO-Index, Schadstoffepisode und Pollen einer Gemeinde, heute oder morgen, für die nächsten Aktionen (eine Nachricht, eine Bedingung).",
+        "es": "El índice ATMO, el episodio de contaminación y el polen de un municipio, hoy o mañana, para las acciones siguientes (un mensaje, una condición)."
+      },
+      "fields": [
+        {
+          "key": "place",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Commune",
+            "fr": "Commune",
+            "de": "Gemeinde",
+            "es": "Municipio"
+          },
+          "description": {
+            "en": "Empty: the first commune.",
+            "fr": "Vide : la première commune.",
+            "de": "Leer: die erste Gemeinde.",
+            "es": "Vacío: el primer municipio."
+          },
+          "required": false
+        },
+        {
+          "key": "day",
+          "type": "select",
+          "label": {
+            "en": "Day",
+            "fr": "Jour",
+            "de": "Tag",
+            "es": "Día"
+          },
+          "options": [
+            {
+              "value": "today",
+              "label": {
+                "en": "Today",
+                "fr": "Aujourd’hui",
+                "de": "Heute",
+                "es": "Hoy"
+              }
+            },
+            {
+              "value": "tomorrow",
+              "label": {
+                "en": "Tomorrow",
+                "fr": "Demain",
+                "de": "Morgen",
+                "es": "Mañana"
+              }
+            }
+          ],
+          "default": "today",
+          "required": false
+        }
+      ],
+      "outputs": [
+        {
+          "key": "place_name",
+          "type": "string",
+          "label": {
+            "en": "Commune",
+            "fr": "Commune",
+            "de": "Gemeinde",
+            "es": "Municipio"
+          }
+        },
+        {
+          "key": "date",
+          "type": "string",
+          "label": {
+            "en": "Date",
+            "fr": "Date",
+            "de": "Datum",
+            "es": "Fecha"
+          }
+        },
+        {
+          "key": "level",
+          "type": "number",
+          "label": {
+            "en": "ATMO index",
+            "fr": "Indice ATMO",
+            "de": "ATMO-Index",
+            "es": "Índice ATMO"
+          },
+          "description": {
+            "en": "1 (good) to 6 (extremely poor); empty when not published.",
+            "fr": "1 (bon) à 6 (extrêmement mauvais) ; vide si pas publié.",
+            "de": "1 (gut) bis 6 (extrem schlecht); leer, wenn nicht veröffentlicht.",
+            "es": "1 (buena) a 6 (extremadamente mala); vacío si no está publicado."
+          }
+        },
+        {
+          "key": "label",
+          "type": "string",
+          "label": {
+            "en": "Air quality",
+            "fr": "Qualité de l’air",
+            "de": "Luftqualität",
+            "es": "Calidad del aire"
+          }
+        },
+        {
+          "key": "pollutants",
+          "type": "string",
+          "label": {
+            "en": "Pollutants",
+            "fr": "Polluants",
+            "de": "Schadstoffe",
+            "es": "Contaminantes"
+          }
+        },
+        {
+          "key": "episode_level",
+          "type": "number",
+          "label": {
+            "en": "Episode level",
+            "fr": "Niveau d’épisode",
+            "de": "Episodenstufe",
+            "es": "Nivel de episodio"
+          }
+        },
+        {
+          "key": "episode_label",
+          "type": "string",
+          "label": {
+            "en": "Pollution episode",
+            "fr": "Épisode de pollution",
+            "de": "Schadstoffepisode",
+            "es": "Episodio de contaminación"
+          }
+        },
+        {
+          "key": "pollen_level",
+          "type": "number",
+          "label": {
+            "en": "Pollen index",
+            "fr": "Indice pollens",
+            "de": "Pollenindex",
+            "es": "Índice de polen"
+          }
+        },
+        {
+          "key": "pollen_label",
+          "type": "string",
+          "label": {
+            "en": "Pollen level",
+            "fr": "Niveau pollens",
+            "de": "Pollenstufe",
+            "es": "Nivel de polen"
+          }
+        },
+        {
+          "key": "pollen_taxa",
+          "type": "string",
+          "label": {
+            "en": "Main pollen",
+            "fr": "Pollen responsable",
+            "de": "Hauptpollen",
+            "es": "Polen principal"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          }
+        }
+      ]
+    }
+  ]
+}

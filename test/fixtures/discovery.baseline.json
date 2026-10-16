@@ -1,0 +1,648 @@
+{
+  "devices": {
+    "commune": {
+      "external_id": "ext:test-integration:commune:33063",
+      "should_poll": false,
+      "params": ["INSEE", "DEPARTMENT", "EPCI"],
+      "features": [
+        {
+          "external_id": "ext:test-integration:commune:33063:index",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:index_tomorrow",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:quality",
+          "category": "text",
+          "type": "text",
+          "min": 0,
+          "max": 0,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:no2",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:o3",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:pm10",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:pm25",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:so2",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:episode",
+          "category": "risk",
+          "type": "integer",
+          "min": 0,
+          "max": 3,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:episode_tomorrow",
+          "category": "risk",
+          "type": "integer",
+          "min": 0,
+          "max": 3,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:pollen",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:pollen_tomorrow",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:pollen_taxa",
+          "category": "text",
+          "type": "text",
+          "min": 0,
+          "max": 0,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:pollen_ambr",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:pollen_arm",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:pollen_aul",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:pollen_boul",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:pollen_gram",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:pollen_oliv",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        }
+      ]
+    },
+    "communeWithoutPollen": {
+      "external_id": "ext:test-integration:commune:33063",
+      "should_poll": false,
+      "params": ["INSEE", "DEPARTMENT", "EPCI"],
+      "features": [
+        {
+          "external_id": "ext:test-integration:commune:33063:index",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:index_tomorrow",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:quality",
+          "category": "text",
+          "type": "text",
+          "min": 0,
+          "max": 0,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:no2",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:o3",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:pm10",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:pm25",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:so2",
+          "category": "airquality-sensor",
+          "type": "aqi",
+          "unit": "aqi",
+          "min": 1,
+          "max": 6,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:episode",
+          "category": "risk",
+          "type": "integer",
+          "min": 0,
+          "max": 3,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:test-integration:commune:33063:episode_tomorrow",
+          "category": "risk",
+          "type": "integer",
+          "min": 0,
+          "max": 3,
+          "read_only": true,
+          "has_feedback": false
+        }
+      ]
+    }
+  },
+  "manifest": {
+    "actions": ["refresh", "diagnostic"],
+    "config_schema": [
+      {
+        "key": "username",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "type": "secret"
+      },
+      {
+        "key": "house_1",
+        "type": "select"
+      },
+      {
+        "key": "commune_1",
+        "type": "string"
+      },
+      {
+        "key": "house_2",
+        "type": "select"
+      },
+      {
+        "key": "commune_2",
+        "type": "string"
+      },
+      {
+        "key": "house_3",
+        "type": "select"
+      },
+      {
+        "key": "commune_3",
+        "type": "string"
+      },
+      {
+        "key": "pollen",
+        "type": "boolean"
+      },
+      {
+        "key": "language",
+        "type": "select"
+      }
+    ],
+    "scene_triggers": [
+      {
+        "key": "air_quality_degraded",
+        "fields": [
+          {
+            "key": "place",
+            "options": []
+          },
+          {
+            "key": "day",
+            "options": ["today", "tomorrow"]
+          },
+          {
+            "key": "level",
+            "options": ["3", "4", "5", "6"]
+          }
+        ],
+        "variables": [
+          {
+            "key": "place_name",
+            "type": "string"
+          },
+          {
+            "key": "day",
+            "type": "string"
+          },
+          {
+            "key": "date",
+            "type": "string"
+          },
+          {
+            "key": "level",
+            "type": "number"
+          },
+          {
+            "key": "label",
+            "type": "string"
+          },
+          {
+            "key": "pollutants",
+            "type": "string"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          },
+          {
+            "key": "insee",
+            "type": "string"
+          },
+          {
+            "key": "place",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "key": "pollution_episode",
+        "fields": [
+          {
+            "key": "place",
+            "options": []
+          },
+          {
+            "key": "day",
+            "options": ["today", "tomorrow"]
+          },
+          {
+            "key": "level",
+            "options": ["information", "persistence", "alert"]
+          }
+        ],
+        "variables": [
+          {
+            "key": "place_name",
+            "type": "string"
+          },
+          {
+            "key": "department",
+            "type": "string"
+          },
+          {
+            "key": "day",
+            "type": "string"
+          },
+          {
+            "key": "date",
+            "type": "string"
+          },
+          {
+            "key": "level",
+            "type": "string"
+          },
+          {
+            "key": "level_number",
+            "type": "number"
+          },
+          {
+            "key": "label",
+            "type": "string"
+          },
+          {
+            "key": "pollutants",
+            "type": "string"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          },
+          {
+            "key": "insee",
+            "type": "string"
+          },
+          {
+            "key": "place",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "key": "pollen_alert",
+        "fields": [
+          {
+            "key": "place",
+            "options": []
+          },
+          {
+            "key": "day",
+            "options": ["today", "tomorrow"]
+          },
+          {
+            "key": "level",
+            "options": ["3", "4", "5", "6"]
+          }
+        ],
+        "variables": [
+          {
+            "key": "place_name",
+            "type": "string"
+          },
+          {
+            "key": "day",
+            "type": "string"
+          },
+          {
+            "key": "date",
+            "type": "string"
+          },
+          {
+            "key": "level",
+            "type": "number"
+          },
+          {
+            "key": "label",
+            "type": "string"
+          },
+          {
+            "key": "taxa",
+            "type": "string"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          },
+          {
+            "key": "insee",
+            "type": "string"
+          },
+          {
+            "key": "place",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "key": "forecast_published",
+        "fields": [
+          {
+            "key": "place",
+            "options": []
+          }
+        ],
+        "variables": [
+          {
+            "key": "place_name",
+            "type": "string"
+          },
+          {
+            "key": "date",
+            "type": "string"
+          },
+          {
+            "key": "level",
+            "type": "number"
+          },
+          {
+            "key": "label",
+            "type": "string"
+          },
+          {
+            "key": "pollutants",
+            "type": "string"
+          },
+          {
+            "key": "episode_level",
+            "type": "number"
+          },
+          {
+            "key": "episode_label",
+            "type": "string"
+          },
+          {
+            "key": "pollen_level",
+            "type": "number"
+          },
+          {
+            "key": "pollen_label",
+            "type": "string"
+          },
+          {
+            "key": "pollen_taxa",
+            "type": "string"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          },
+          {
+            "key": "insee",
+            "type": "string"
+          },
+          {
+            "key": "place",
+            "type": "string"
+          }
+        ]
+      }
+    ],
+    "scene_actions": [
+      {
+        "key": "get_air_quality",
+        "fields": ["place", "day"],
+        "outputs": [
+          {
+            "key": "place_name",
+            "type": "string"
+          },
+          {
+            "key": "date",
+            "type": "string"
+          },
+          {
+            "key": "level",
+            "type": "number"
+          },
+          {
+            "key": "label",
+            "type": "string"
+          },
+          {
+            "key": "pollutants",
+            "type": "string"
+          },
+          {
+            "key": "episode_level",
+            "type": "number"
+          },
+          {
+            "key": "episode_label",
+            "type": "string"
+          },
+          {
+            "key": "pollen_level",
+            "type": "number"
+          },
+          {
+            "key": "pollen_label",
+            "type": "string"
+          },
+          {
+            "key": "pollen_taxa",
+            "type": "string"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          }
+        ]
+      }
+    ],
+    "widgets": [
+      {
+        "key": "forecast",
+        "settings": ["place"],
+        "options": {}
+      },
+      {
+        "key": "pollen",
+        "settings": ["place"],
+        "options": {}
+      }
+    ]
+  }
+}

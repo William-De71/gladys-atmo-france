@@ -1,0 +1,18 @@
+Gladys Atmo France integration
+Copyright 2026 William Deren
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+The data come from Atmo Data (https://admindata.atmo-france.org), produced by
+the regional air quality monitoring associations (AASQA) and aggregated by the
+Fédération Atmo France, under the Open Database License (ODbL). Each reading
+shows its source AASQA, as the licence requires. Communes are found with
+geo.api.gouv.fr, an open API of the French government.
+
+The way the Atmo Data API is read was learned from the Home Assistant
+integration atmofrance by sebcaps (MIT, https://github.com/sebcaps/atmofrance)
+and from the Recosante project of the French government (Apache 2.0,
+https://github.com/SocialGouv/recosante). No file of either is included.
+
+This community integration is not affiliated with, endorsed or sponsored by
+the Fédération Atmo France or the AASQA.
