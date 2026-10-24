@@ -5,6 +5,12 @@ follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions
 follow [Semantic Versioning](https://semver.org/). This file is generated at
 each release from the Conventional Commits: do not edit it by hand.
 
+## [0.1.1] - 2026-10-24
+
+### Security
+
+- **security:** build the image on Node.js 24.22.1 or later ([bcc188d](https://github.com/William-De71/gladys-atmo-france/commit/bcc188d45f036d96800721a547958d4bc21d8e4b))
+
 ## [0.1.0] - 2026-10-16
 
 ### Added
@@ -18,4 +24,5 @@ each release from the Conventional Commits: do not edit it by hand.
 - Cloud transport: the Atmo Data API of the Fédération Atmo France is read twice a day on the integration's own timer, outside its publication window, and kept in `/data`.
 - English, French, German and Spanish everywhere: settings, devices, widgets, scenes and documentation.
 
+[0.1.1]: https://github.com/William-De71/gladys-atmo-france/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/William-De71/gladys-atmo-france/releases/tag/v0.1.0

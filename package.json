@@ -1,6 +1,6 @@
 {
   "name": "gladys-atmo-france",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "External Gladys Assistant integration for Atmo France: ATMO air quality index per commune (today and tomorrow), pollutant sub-indices, pollution episodes and pollen, scenes and dashboard widgets.",
   "homepage": "https://github.com/William-De71/gladys-atmo-france",
