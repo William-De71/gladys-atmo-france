@@ -5,7 +5,7 @@
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Latest release](https://img.shields.io/github/v/release/William-De71/gladys-atmo-france?sort=semver)](https://github.com/William-De71/gladys-atmo-france/releases)
 [![CI](https://img.shields.io/github/actions/workflow/status/William-De71/gladys-atmo-france/release.yml?branch=main&label=CI)](https://github.com/William-De71/gladys-atmo-france/actions/workflows/release.yml)
-[![Gladys](https://img.shields.io/badge/Gladys-%E2%89%A5%205.2.0-2f6fb5)](https://gladysassistant.com)
+[![Gladys](https://img.shields.io/badge/Gladys-%E2%89%A5%205.3.0-2f6fb5)](https://gladysassistant.com)
 
 ![Atmo France for Gladys Assistant](cover.jpg)
 
@@ -99,7 +99,7 @@ Examples:
 
 ## Requirements
 
-- Gladys Assistant **5.2.0** or later (house selector in the configuration). Older instances cannot install the integration.
+- Gladys Assistant **5.3.0** or later (catalog keywords and countries, house selector in the configuration). Older instances cannot install the integration.
 - A free **Atmo Data account**: request it on [admindata.atmo-france.org/inscription-api](https://admindata.atmo-france.org/inscription-api); Atmo France validates it by e-mail (a few days), then you choose a password.
 - A house of Gladys with its location, or the name of a French commune (overseas included).
 

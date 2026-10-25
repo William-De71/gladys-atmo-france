@@ -10,7 +10,7 @@ C’est une intégration **cloud** : elle contacte `admindata.atmo-france.org` a
 
 ## Prérequis
 
-- Gladys Assistant 5.2.0 ou plus récent.
+- Gladys Assistant 5.3.0 ou plus récent.
 - Un compte Atmo Data gratuit. Demandez-le sur <https://admindata.atmo-france.org/inscription-api> : Atmo France valide la demande par e-mail, en général sous quelques jours, puis vous choisissez votre mot de passe.
 - La position de votre maison dans Gladys (Paramètres > Maisons), ou le nom de la commune à suivre. Les communes de métropole, de Corse et d’outre-mer sont couvertes.
 

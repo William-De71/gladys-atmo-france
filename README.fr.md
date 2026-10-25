@@ -5,7 +5,7 @@
 [![Licence : Apache-2.0](https://img.shields.io/badge/licence-Apache--2.0-blue.svg)](LICENSE)
 [![Dernière version](https://img.shields.io/github/v/release/William-De71/gladys-atmo-france?sort=semver)](https://github.com/William-De71/gladys-atmo-france/releases)
 [![CI](https://img.shields.io/github/actions/workflow/status/William-De71/gladys-atmo-france/release.yml?branch=main&label=CI)](https://github.com/William-De71/gladys-atmo-france/actions/workflows/release.yml)
-[![Gladys](https://img.shields.io/badge/Gladys-%E2%89%A5%205.2.0-2f6fb5)](https://gladysassistant.com)
+[![Gladys](https://img.shields.io/badge/Gladys-%E2%89%A5%205.3.0-2f6fb5)](https://gladysassistant.com)
 
 ![Atmo France pour Gladys Assistant](cover.jpg)
 
@@ -99,7 +99,7 @@ Exemples :
 
 ## Prérequis
 
-- Gladys Assistant **5.2.0** ou plus récent (sélecteur de maison dans la configuration). Les instances plus anciennes ne peuvent pas installer l’intégration.
+- Gladys Assistant **5.3.0** ou plus récent (mots-clés et pays du catalogue, sélecteur de maison dans la configuration). Les instances plus anciennes ne peuvent pas installer l’intégration.
 - Un **compte Atmo Data** gratuit : demandez-le sur [admindata.atmo-france.org/inscription-api](https://admindata.atmo-france.org/inscription-api) ; Atmo France le valide par e-mail (quelques jours), puis vous choisissez un mot de passe.
 - Une maison de Gladys avec sa position, ou le nom d’une commune française (outre-mer compris).
 

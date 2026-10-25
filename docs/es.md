@@ -10,7 +10,7 @@ Es una integración **en la nube**: contacta con `admindata.atmo-france.org` con
 
 ## Requisitos previos
 
-- Gladys Assistant 5.2.0 o posterior.
+- Gladys Assistant 5.3.0 o posterior.
 - Una cuenta gratuita de Atmo Data. Solicítela en <https://admindata.atmo-france.org/inscription-api>: Atmo France valida la solicitud por correo, normalmente en unos días, y después elige su contraseña.
 - La ubicación de su casa en Gladys (Ajustes > Casas), o el nombre del municipio que seguir. Están cubiertos los municipios de la Francia continental, Córcega y ultramar.
 

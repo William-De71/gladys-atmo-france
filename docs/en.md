@@ -10,7 +10,7 @@ It is a **cloud** integration: it contacts `admindata.atmo-france.org` with your
 
 ## Prerequisites
 
-- Gladys Assistant 5.2.0 or later.
+- Gladys Assistant 5.3.0 or later.
 - A free Atmo Data account. Request it at <https://admindata.atmo-france.org/inscription-api>: Atmo France validates the request by e-mail, usually within a few days, then you choose your password.
 - The location of your house in Gladys (Settings > Houses), or the name of the commune to follow. Communes of mainland France, Corsica and overseas are covered.
 
